@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
+.kunkka {
+  padding: 1em;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  color: #444;
+}
+
+h1 {
+  margin: 0;
+}
+
+input[type=text], button {
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+}
+
+input[type=text] {
+  background: #eee;
+  height: 3em;
+  padding: 0 1em;
+  text-align: center;
+}
+
+button {
+  color: white;
+  font-weight: bold;
+  background-color: #9cf;
+  line-height: 3;
+}
+
+.streaming {
+  border: 1px solid;
+  padding: 1em;
+}
