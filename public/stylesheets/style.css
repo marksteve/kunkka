@@ -15,7 +15,7 @@ body, input, button {
 }
 
 p {
-  margin: 0 0 5px 0;
+  margin: 0 0 15px 0;
 }
 
 h1 {
@@ -37,7 +37,7 @@ input:focus, button:focus {
 }
 
 input[type=text] {
-  height: 2em;
+  height: 3em;
   padding: 0 1em;
   text-align: center;
   color: #444;
@@ -48,7 +48,7 @@ button {
   color: white;
   font-weight: bold;
   background-color: #9cf;
-  line-height: 2;
+  line-height: 3;
 }
 
 button:disabled {
@@ -60,9 +60,9 @@ button:disabled {
   color: #444;
   text-align: center;
   text-decoration: none;
-  padding: 0.5em 1em;
+  padding: 1em;
   overflow: hidden;
-  margin: 15px 0;
+  margin: 30px 0;
   display: block;
 }
 
