@@ -58,6 +58,7 @@ exports.stream = function(req, res){
 };
 
 exports.stop = function(req, res){
+  console.log('stop', streaming);
   removeEngine(function() {
     res.redirect('/');
   });
