@@ -8,9 +8,14 @@ html
   body
     .kunkka
       h1 kunkka
+      p.streaming
+        if streaming
+          = streaming
+          a(href='/stop').stop &#9632; stop
+        else
+          | not streaming anything
       form(action='', method='post')
         p
           input(type='text', name='torrent', class='torrent', placeholder='magnet/torrent url')
         p
           button(type='submit') &#9658; stream
-      p.streaming= streaming

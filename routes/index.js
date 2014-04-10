@@ -1,15 +1,15 @@
 var readTorrent = require('read-torrent');
 var peerflix = require('peerflix');
 var engine = null;
-var streaming = 'not streaming anything';
+var streaming = null;
 
 exports.index = function(req, res){
   res.render('index', {streaming: streaming});
 };
 
-function createEngine(torrent, onready) {
+function createEngine(torrent, onready){
   var engine = peerflix(torrent);
-  engine.on('ready', function() {
+  engine.on('ready', function(){
     onready(engine.files[0]);
     engine.server.listen(8888);
     console.log('peerflix listening at 8888');
@@ -17,14 +17,19 @@ function createEngine(torrent, onready) {
   return engine;
 }
 
-function recreateEngine(torrent, onready) {
-  if (engine) {
+function removeEngine(cb){
+  streaming = null;
+  engine.remove(function(){
+    engine.destroy();
+    engine.server.close(cb);
+  });
+}
+
+function recreateEngine(torrent, onready){
+  if (engine && !engine.swarm._destroyed) {
     console.log('recreating peerflix');
-    engine.remove(function() {
-      engine.destroy();
-      engine.server.close(function() {
-        engine = createEngine(torrent, onready);
-      });
+    removeEngine(function() {
+      engine = createEngine(torrent, onready);
     });
   } else {
     engine = createEngine(torrent, onready);
@@ -33,7 +38,7 @@ function recreateEngine(torrent, onready) {
 
 exports.stream = function(req, res){
   var filename = req.param('torrent');
-  function showStreaming(file) {
+  function showStreaming(file){
     console.log('peerflix', file.name);
     streaming = file.name;
     res.render('index', {streaming: streaming});
@@ -50,4 +55,10 @@ exports.stream = function(req, res){
       }
     });
   }
+};
+
+exports.stop = function(req, res){
+  removeEngine(function() {
+    res.redirect('/');
+  });
 };

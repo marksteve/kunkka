@@ -20,6 +20,7 @@ app.use(app.router);
 
 app.get('/', routes.index);
 app.post('/', routes.stream);
+app.get('/stop', routes.stop);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {

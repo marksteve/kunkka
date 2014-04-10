@@ -38,3 +38,10 @@ button {
   border: 1px solid;
   padding: 1em;
 }
+
+.stop {
+  font-weight: bold;
+  text-decoration: none;
+  color: #c99;
+  margin-left: 1em;
+}
