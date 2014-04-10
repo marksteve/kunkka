@@ -7,36 +7,47 @@ exports.index = function(req, res){
   res.render('index', {streaming: streaming});
 };
 
-function createEngine(torrent) {
+function createEngine(torrent, onready) {
   var engine = peerflix(torrent);
   engine.on('ready', function() {
+    onready(engine.files[0]);
     engine.server.listen(8888);
     console.log('peerflix listening at 8888');
   });
   return engine;
 }
 
-function recreateEngine(torrent) {
+function recreateEngine(torrent, onready) {
   if (engine) {
     console.log('recreating peerflix');
     engine.remove(function() {
       engine.destroy();
       engine.server.close(function() {
-        engine = createEngine(torrent);
+        engine = createEngine(torrent, onready);
       });
     });
   } else {
-    engine = createEngine(torrent);
+    engine = createEngine(torrent, onready);
   }
 }
 
 exports.stream = function(req, res){
-  readTorrent(req.param('torrent'), function(err, torrent){
-    if (!err) {
-      recreateEngine(torrent);
-    }
-    streaming = err ? err : torrent.name;
-    console.log('peerflix', streaming);
+  var filename = req.param('torrent');
+  function showStreaming(file) {
+    console.log('peerflix', file.name);
+    streaming = file.name;
     res.render('index', {streaming: streaming});
-  });
+  }
+  if (/^magnet:/.test(filename)) {
+    recreateEngine(filename, showStreaming);
+  } else {
+    readTorrent(filename, function(err, torrent){
+      if (err) {
+        streaming = err;
+        res.render('index', {streaming: err});
+      } else {
+        recreateEngine(torrent, showStreaming);
+      }
+    });
+  }
 };
