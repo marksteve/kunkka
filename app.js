@@ -1,7 +1,6 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var favicon = require('static-favicon');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes');
@@ -12,7 +11,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(favicon());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
