@@ -2,46 +2,70 @@
   box-sizing: border-box;
 }
 
+body, input, button {
+  font-size: 15px;
+  color: #444;
+}
+
 .kunkka {
   padding: 1em;
   max-width: 640px;
   margin: 0 auto;
-  text-align: center;
-  color: #444;
+  position: relative;
+}
+
+p {
+  margin: 0 0 5px 0;
 }
 
 h1 {
   margin: 0;
+  font-size: 30px;
+  line-height: 1;
+  text-align: center;
 }
 
 input[type=text], button {
   width: 100%;
   border: 0;
   border-radius: 0;
+  display: block;
+}
+
+input:focus, button:focus {
+  outline: none;
 }
 
 input[type=text] {
-  background: #eee;
-  height: 3em;
+  height: 2em;
   padding: 0 1em;
   text-align: center;
+  color: #444;
+  border: 1px solid #ccc;
 }
 
 button {
   color: white;
   font-weight: bold;
   background-color: #9cf;
-  line-height: 3;
+  line-height: 2;
+}
+
+button:disabled {
+  opacity: 0.2;
 }
 
 .streaming {
-  padding: 1em;
+  background: #eee;
+  color: #444;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.5em 1em;
   overflow: hidden;
+  margin: 15px 0;
+  display: block;
 }
 
 .stop {
-  font-weight: bold;
-  text-decoration: none;
-  color: #c99;
-  display: block;
+  display: none;
 }

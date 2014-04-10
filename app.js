@@ -2,6 +2,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var bodyParser = require('body-parser');
+var ws = require('sockjs').createServer();
 
 var routes = require('./routes');
 
@@ -17,8 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
 app.get('/', routes.index);
-app.post('/', routes.stream);
-app.get('/stop', routes.stop);
+ws.on('connection', routes.ws);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -49,5 +49,11 @@ app.use(function(err, req, res, next) {
     });
 });
 
+
+app.listen = function(){
+    var server = http.createServer(this);
+    ws.installHandlers(server, {prefix: '/ws'});
+    return server.listen.apply(server, arguments);
+};
 
 module.exports = app;

@@ -11,17 +11,17 @@ html
     link(rel='apple-touch-icon' sizes='76x76' href='/images/kunkka-76.png')
     link(rel='apple-touch-icon' sizes='120x120' href='/images/kunkka-120.png')
     link(rel='apple-touch-icon' sizes='152x152' href='/images/kunkka-152.png')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/sockjs-client/0.3.4/sockjs.min.js')
+    script(src='/javascripts/index.js')
   body
     .kunkka
       h1 kunkka
-      p.streaming
-        if streaming
-          = streaming
-          a(href='/stop').stop &#9632; stop
-        else
-          | not streaming anything
-      form(action='', method='post')
-        p
-          input(type='text', name='torrent', class='torrent', placeholder='magnet/torrent url')
-        p
-          button(type='submit') &#9658; stream
+      p
+        a.streaming loading&hellip;
+      p
+        input(type='text', placeholder='magnet/torrent url').torrent
+      p
+        button(type='button').stream stream
+      p
+        button(type='button').stop stop
