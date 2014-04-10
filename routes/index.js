@@ -19,14 +19,18 @@ function createEngine(torrent, onready){
 
 function removeEngine(cb){
   streaming = null;
-  engine.remove(function(){
-    engine.destroy();
-    engine.server.close(cb);
-  });
+  if (!engine.swarm._destroyed) {
+    engine.remove(function(){
+      engine.destroy();
+      engine.server.close(cb);
+    });
+  } else {
+    cb();
+  }
 }
 
 function recreateEngine(torrent, onready){
-  if (engine && !engine.swarm._destroyed) {
+  if (engine) {
     console.log('recreating peerflix');
     removeEngine(function() {
       engine = createEngine(torrent, onready);
