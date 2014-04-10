@@ -1,7 +1,7 @@
 kunkka
 ======
 
-Simple web interface for peerflix
+Simple web interface for [peerflix](https://github.com/mafintosh/peerflix)
 
 Usage
 -----
