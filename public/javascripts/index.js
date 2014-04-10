@@ -22,8 +22,8 @@ sock.onopen = function(){
   $('.stop').click(stop);
 };
 
-function status(message){
-  $('.stream').text(message);
+function status(message, disabled){
+  $('.stream').text(message).prop('disabled', !!disabled);
 }
 
 function streaming(filename, url){

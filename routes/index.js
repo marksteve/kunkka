@@ -34,7 +34,7 @@ function removeEngine(cb){
 }
 
 function recreateEngine(torrent, onready){
-  if (engine) {
+  if (engine || (engine && engine.swarm._destroyed)) {
     console.log('recreating peerflix');
     removeEngine(function() {
       engine = createEngine(torrent, onready);
@@ -55,7 +55,7 @@ function sendMsg(conn, evt) {
 
 function stream(filename){
   var conn = this;
-  sendMsg(conn, 'status', "getting torrent info");
+  sendMsg(conn, 'status', "getting torrent info", true);
   function showStreaming(file){
     console.log('peerflix', file.name);
     sendMsg(conn, 'status', "change stream");
