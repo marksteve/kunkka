@@ -8,9 +8,9 @@ html
   body
     .kunkka
       h1 kunkka
-      p
-        input(type='text', class='torrent', placeholder='magnet/torrent url')
-      p
-        button(type='button') &#9658; stream
-      p.streaming.
-        [Chihiro]_Mangaka-san_to_Assistant-san_to_-_01_[1280x720_H.264_AAC][BF3FCFDD].mkv
+      form(action='', method='post')
+        p
+          input(type='text', name='torrent', class='torrent', placeholder='magnet/torrent url')
+        p
+          button(type='submit') &#9658; stream
+      p.streaming= streaming

@@ -2,7 +2,6 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var favicon = require('static-favicon');
-var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes');
@@ -14,13 +13,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(favicon());
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
 app.get('/', routes.index);
+app.post('/', routes.stream);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
