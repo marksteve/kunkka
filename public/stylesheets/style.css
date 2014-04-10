@@ -36,11 +36,12 @@ button {
 
 .streaming {
   padding: 1em;
+  overflow: hidden;
 }
 
 .stop {
   font-weight: bold;
   text-decoration: none;
   color: #c99;
-  margin-left: 1em;
+  display: block;
 }
