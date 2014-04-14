@@ -1,7 +1,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var bodyParser = require('body-parser');
+var favicon = require('static-favicon');
 var ws = require('sockjs').createServer();
 
 var routes = require('./routes');
@@ -12,10 +12,8 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(app.router);
 
 app.get('/', routes.index);
 ws.on('connection', routes.ws);
